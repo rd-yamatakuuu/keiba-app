@@ -1,4 +1,4 @@
-package com.keiba_app.demo;
+package com.keiba_app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
