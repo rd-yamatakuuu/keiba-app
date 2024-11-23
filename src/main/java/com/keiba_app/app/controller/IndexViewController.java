@@ -12,7 +12,7 @@ public class IndexViewController {
 
     @GetMapping
     public String showIndexView(Model model) {
-        model.addAttribute("message", "Welcome! Success!!");
+        //model.addAttribute("message", "Welcome! Success!!");
         return "index";
     }
 }
