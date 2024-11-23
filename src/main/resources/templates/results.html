@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="flex flex-col">
+        <div class="mt-4 ml-16 text-4xl font-bold text-red-600 mb-6 italic">Prediction</div>
+
+        <div class="flex flex-wrap gap-1 ml-32">
+            <button class="px-4 py-2 rounded bg-green-800 text-white">中山</button>
+            <button class="px-4 py-2 rounded bg-gray-400 text-white">東京</button>
+            <button class="px-4 py-2 rounded bg-gray-400 text-white">京都</button>
+            <button class="px-4 py-2 rounded bg-green-800 text-white">中京</button>
+            <button class="px-4 py-2 rounded bg-gray-400 text-white">阪神</button>
+            <button class="px-4 py-2 rounded bg-gray-400 text-white">新潟</button>
+            <button class="px-4 py-2 rounded bg-gray-400 text-white">札幌</button>
+            <button class="px-4 py-2 rounded bg-gray-400 text-white">函館</button>
+            <button class="px-4 py-2 rounded bg-gray-400 text-white">福島</button>
+            <button class="px-4 py-2 rounded bg-gray-400 text-white">小倉</button>
+        </div>
+
+        <div class="bg-white rounded-lg shadow ml-32 mr-32">
+            <div class="divide-y divide-gray-200">
+                <div class="grid grid-cols-2 p-4">
+                    <div class="text-center">2歳新馬</div>
+                    <div class="text-center">
+                        <button class="text-blue-600 hover:underline">予測する</button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 p-4">
+                    <div class="text-center">凱旋門賞</div>
+                    <div class="text-center">
+                        <button class="text-blue-600 hover:underline">予測する</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="text-right mt-4 mb-4 mr-32">
+            <button class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700">
+                全て予測する
+            </button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

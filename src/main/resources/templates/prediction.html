@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+  <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="flex flex-col">
+    <div class="mt-4 ml-16 text-4xl font-bold text-red-600 mb-6 italic">Prediction</div>
+    <div>
+      <form method="get" action="/get-candidate-race">
+        <label>
+          <input name="dateId" type="text">
+        </label>
+        <input type="submit" value="予測する">
+      </form>
+    </div>
+    <div>
+      <p>※入力するIDは、netkeibaページを参照ください</p>
+      <p>競馬場のIDは、札幌：01, 函館：02, 福島：03, 新潟：04, 東京：05, 中山：06, 中京：07, 京都：08, 阪神：09, 小倉：10</p>
+      <p>IDは、yyyy年 + 競馬場ID + 回数 + 日目 + レースNoとなります。</p>
+      <p>そのため、たとえば2024年6回京都5日目の9Rだと、202408060509となります。</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

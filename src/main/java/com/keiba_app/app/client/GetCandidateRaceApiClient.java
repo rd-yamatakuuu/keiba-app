@@ -3,6 +3,7 @@ package com.keiba_app.app.client;
 
 import com.keiba_app.app.controller.GetCandidateRace.GetCandidateRaceResponseItem;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
