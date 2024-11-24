@@ -31,12 +31,13 @@ public class PredictionViewController {
     //    this.restTemplate = restTemplate;
     //}
 
-    @GetMapping("/prediction")
+    @GetMapping
     public String showPredictionView(Model model) {
+        model.addAttribute("predictionForm", new PredictionForm());
         return "prediction";
     }
 
-    @GetMapping("/prediction/results")
+    @GetMapping("/results")
     public String showPredictionResultsView(@RequestParam("dateId") String dateId, Model model) {
 
         try {
