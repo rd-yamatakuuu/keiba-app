@@ -6,10 +6,10 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <title>Title</title>
 </head>
-<body>
-  <div layout:fragment="content">
-    <div class="flex flex-col">
-      <div class="mt-4 ml-16 text-4xl font-bold text-red-600 mb-6 italic">Prediction</div>
+<body class="flex flex-col min-h-screen">
+  <div layout:fragment="content" class="bg-[#f1f1eb] flex-grow">
+    <div>
+      <div class="mt-4 ml-16 text-4xl font-bold text-red-600 mb-12 italic">Prediction</div>
       <div class="flex justify-center mb-12">
         <form method="get" action="#" th:action="@{/prediction/results}" th:object="${predictionForm}" class="max-w-sm mx-auto">
           <label>

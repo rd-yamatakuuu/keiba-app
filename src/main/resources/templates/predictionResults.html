@@ -6,18 +6,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Title</title>
 </head>
-<body>
-    <div layout:fragment="content">
-        <div class="flex flex-col">
-            <div class="mt-4 ml-16 text-4xl font-bold text-red-600 mb-6 italic">Prediction Results</div>
-            <div class="flex justify-center mb-12">
-                <div class="flex flex-col">
-                    <div>※入力するIDは、netkeibaページを参照ください</div>
-                    <div>競馬場のIDは、札幌：01, 函館：02, 福島：03, 新潟：04, 東京：05, 中山：06, 中京：07, 京都：08, 阪神：09, 小倉：10</div>
-                    <div>IDは、yyyy年 + 競馬場ID + 回数 + 日目 + レースNoとなります。</div>
-                    <div>そのため、たとえば2024年6回京都5日目の9Rだと、202408060509となります。</div>
-                </div>
-            </div>
+<body class="flex flex-col min-h-screen">
+    <div layout:fragment="content" class="bg-[#f1f1eb] flex-grow">
+        <div>
+            <div class="mt-4 ml-16 text-4xl font-bold text-red-600 mb-12 italic">Prediction Results</div>
             <div class="flex justify-center mb-12">
                 <table class="table-fixed border-collapse">
                     <thead>
