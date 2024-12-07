@@ -3,6 +3,8 @@ package com.keiba_app.app.controller;
 
 import com.keiba_app.app.controller.GetCandidateRace.GetCandidateRaceController;
 import com.keiba_app.app.controller.GetCandidateRace.GetCandidateRaceResponseParameter;
+import com.keiba_app.app.controller.PredictTop3.PredictTop3Controller;
+import com.keiba_app.app.controller.PredictTop3.PredictTop3ResponseParameter;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +26,7 @@ public class PredictionViewController {
 
     //private final RestTemplate restTemplate;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final GetCandidateRaceController candidateRaceController;
+    private final PredictTop3Controller predictTop3Controller;
 
     //@Autowired
     //public PredictionViewController(RestTemplate restTemplate) {
@@ -41,7 +43,10 @@ public class PredictionViewController {
     public String showPredictionResultsView(@RequestParam("dateId") String dateId, Model model) {
 
         try {
-            ResponseEntity<GetCandidateRaceResponseParameter> response = candidateRaceController.getCandidateRace(dateId);
+            ResponseEntity<PredictTop3ResponseParameter> response = predictTop3Controller.predictTop3(dateId);
+            logger.info(String.valueOf(response.getBody()));
+            model.addAttribute("predictTop3", response.getBody());
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

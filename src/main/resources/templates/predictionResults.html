@@ -24,14 +24,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="border border-gray-600 px-4 py-2">有馬記念</td>
-                        <td class="border border-gray-600 px-4 py-2">ディープインパクト</td>
-                        <td class="border border-gray-600 px-4 py-2">90%</td>
-                        <td class="border border-gray-600 px-4 py-2">オルフェーブル</td>
-                        <td class="border border-gray-600 px-4 py-2">45%</td>
-                        <td class="border border-gray-600 px-4 py-2">ドウデュース</td>
-                        <td class="border border-gray-600 px-4 py-2">80%</td>
+                    <tr th:if="${predictTop3 != null}">
+                        <td class="border border-gray-600 px-4 py-2" th:text="${predictTop3.race_name}"></td>
+                        <td class="border border-gray-600 px-4 py-2" th:text="${predictTop3.first_horse}"></td>
+                        <td class="border border-gray-600 px-4 py-2" th:text="${predictTop3.first_rate}"></td>
+                        <td class="border border-gray-600 px-4 py-2" th:text="${predictTop3.second_horse}"></td>
+                        <td class="border border-gray-600 px-4 py-2" th:text="${predictTop3.second_rate}"></td>
+                        <td class="border border-gray-600 px-4 py-2" th:text="${predictTop3.third_horse}"></td>
+                        <td class="border border-gray-600 px-4 py-2" th:text="${predictTop3.third_rate}"></td>
                     </tr>
                     </tbody>
                 </table>
