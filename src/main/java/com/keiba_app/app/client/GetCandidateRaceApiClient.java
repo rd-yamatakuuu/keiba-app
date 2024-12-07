@@ -3,6 +3,8 @@ package com.keiba_app.app.client;
 
 import com.keiba_app.app.controller.GetCandidateRace.GetCandidateRaceResponseItem;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -18,6 +20,8 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class GetCandidateRaceApiClient {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final RestTemplate restTemplate;
 
     //private final String dateId = "02405040411";
@@ -38,6 +42,8 @@ public class GetCandidateRaceApiClient {
                     new ParameterizedTypeReference<List<GetCandidateRaceResponseItem>>() {
                     }
             );
+
+            logger.info("GetCandidateRaceApi result: {}", response);
             return new GetCandidateRaceResponseParameter(response.getBody());
             //return restTemplate.getForObject(url,  GetCandidateRaceResponseParameter.class);
         } catch (RestClientException e) {
