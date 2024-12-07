@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Title</title>
+</head>
+<body class="flex flex-col min-h-screen">
+    <div layout:fragment="content" class="bg-[#f1f1eb] flex-grow">
+        <div>
+            <div class="mt-4 ml-16 text-4xl font-bold text-red-600 mb-12 italic">Prediction Results</div>
+            <div class="flex justify-center mb-12">
+                <table class="table-fixed border-collapse">
+                    <thead>
+                    <tr class="bg-[#243c1b] text-white">
+                        <th class="border border-gray-600 px-4 py-2">レース</th>
+                        <th class="border border-gray-600 px-4 py-2">1位</th>
+                        <th class="border border-gray-600 px-4 py-2">1位確率</th>
+                        <th class="border border-gray-600 px-4 py-2">2位</th>
+                        <th class="border border-gray-600 px-4 py-2">2位確率</th>
+                        <th class="border border-gray-600 px-4 py-2">3位</th>
+                        <th class="border border-gray-600 px-4 py-2">3位確率</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${predictTop3 != null}">
+                        <td class="border border-gray-600 px-4 py-2" th:text="${predictTop3.race_name}"></td>
+                        <td class="border border-gray-600 px-4 py-2" th:text="${predictTop3.first_horse}"></td>
+                        <td class="border border-gray-600 px-4 py-2" th:text="${predictTop3.first_rate}"></td>
+                        <td class="border border-gray-600 px-4 py-2" th:text="${predictTop3.second_horse}"></td>
+                        <td class="border border-gray-600 px-4 py-2" th:text="${predictTop3.second_rate}"></td>
+                        <td class="border border-gray-600 px-4 py-2" th:text="${predictTop3.third_horse}"></td>
+                        <td class="border border-gray-600 px-4 py-2" th:text="${predictTop3.third_rate}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
