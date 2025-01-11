@@ -29,9 +29,9 @@ public class SearchRaceHistoryServiceImpl implements SearchRaceHistoryService {
     public List<SearchRaceHistoryResponseParameter> searchRaceHistoryByCondition(
             SearchRaceHistoryRequestParameter requestParameter) throws Exception {
         logger.info("SearchRaceHistoryServiceImpl requestParam: {}", requestParameter);
-        logger.info("SearchRaceHistoryServiceImpl response: {}", raceHistoryRepository.selectAll());
+        logger.info("SearchRaceHistoryServiceImpl response: {}", raceHistoryRepository.findByConditions(requestParameter));
 
-        List<Map<String, Object>> rawResults = raceHistoryRepository.selectAll();
+        List<Map<String, Object>> rawResults = raceHistoryRepository.findByConditions(requestParameter);
 
         return rawResults.stream()
                 .map(row -> {

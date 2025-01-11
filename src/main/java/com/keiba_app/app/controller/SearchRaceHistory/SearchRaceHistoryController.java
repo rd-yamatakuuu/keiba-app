@@ -7,10 +7,7 @@ import org.apache.coyote.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,9 +18,9 @@ public class SearchRaceHistoryController {
     private final SearchRaceHistoryServiceImpl searchRaceHistoryServiceImpl;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @GetMapping
+    @PostMapping
     public ResponseEntity<List<SearchRaceHistoryResponseParameter>> searchRaceHistory(
-            @RequestParam(required = false) SearchRaceHistoryRequestParameter requestParameter) throws Exception {
+            @RequestBody SearchRaceHistoryRequestParameter requestParameter) throws Exception {
 
         logger.info("SearchRaceHistoryController request parameter: {}", requestParameter);
 
