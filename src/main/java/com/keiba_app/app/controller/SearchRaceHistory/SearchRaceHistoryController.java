@@ -1,5 +1,7 @@
 package com.keiba_app.app.controller.SearchRaceHistory;
 
+import com.keiba_app.app.exception.ErrorResponse;
+import com.keiba_app.app.exception.TooManyResultsException;
 import com.keiba_app.app.service.SearchRaceHistory.SearchRaceHistoryService;
 import com.keiba_app.app.service.SearchRaceHistory.SearchRaceHistoryServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,16 @@ public class SearchRaceHistoryController {
         logger.info("SearchRaceHistoryController request parameter: {}", requestParameter);
 
         return ResponseEntity.ok(searchRaceHistoryServiceImpl.searchRaceHistoryByCondition(requestParameter));
+    }
+
+    @ExceptionHandler(TooManyResultsException.class)
+    public ResponseEntity<ErrorResponse> handleTooManyRequests(TooManyResultsException e) {
+        logger.error("Too many results error : {}", e.getMessage());
+        ErrorResponse error = new ErrorResponse(
+                "TOO_MANY_RESULTS",
+                e.getMessage()
+        );
+        return ResponseEntity.badRequest().body(error);
     }
 
 }

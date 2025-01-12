@@ -19,43 +19,59 @@ import java.util.Map;
 @Repository
 public interface RaceHistoryRepository extends JpaRepository<RaceHistory, Integer> {
     String SEARCH_QUERY = """
-        SELECT
-            race_course AS raceCourse,
-            place_condition AS placeCondition,
-            race_name AS raceName,
-            course_length AS courseLength,
-            race_time AS raceTime,
-            year AS year,
-            horse_name AS horseName,
-            sex AS sex,
-            old AS old,
-            jockey_name AS jockeyName,
-            race_order AS raceOrder
-        FROM t_race_with_race_name trwrn
-        WHERE (:#{#param.raceCourse} IS NULL OR trwrn.race_course = :#{#param.raceCourse})
-            AND (:#{#param.placeCondition} IS NULL OR trwrn.place_condition = :#{#param.placeCondition})
-            AND (:#{#param.raceName} IS NULL OR trwrn.race_name = :#{#param.raceName})
-            AND (:#{#param.courseLength} IS NULL OR trwrn.course_length = :#{#param.courseLength})
-            AND (:#{#param.raceTime} IS NULL OR trwrn.race_time = :#{#param.raceTime})
-            AND (:#{#param.year} IS NULL OR trwrn.year = :#{#param.year})
-            AND (:#{#param.horseName} IS NULL OR trwrn.horse_name = :#{#param.horseName})
-            AND (:#{#param.sex} IS NULL OR trwrn.sex = :#{#param.sex})
-            AND (:#{#param.old} IS NULL OR trwrn.old = :#{#param.old})
-            AND (:#{#param.jockeyName} IS NULL OR trwrn.jockey_name = :#{#param.jockeyName})
-            AND (:#{#param.raceOrder} IS NULL OR trwrn.race_order = :#{#param.raceOrder})
-        limit 20
-        ;
-    """;
-    @Query(value=SEARCH_QUERY, nativeQuery = true)
+                SELECT
+                    race_course AS raceCourse,
+                    place_condition AS placeCondition,
+                    race_name AS raceName,
+                    course_length AS courseLength,
+                    race_time AS raceTime,
+                    year AS year,
+                    horse_name AS horseName,
+                    sex AS sex,
+                    old AS old,
+                    jockey_name AS jockeyName,
+                    race_order AS raceOrder
+                FROM t_race_with_race_name trwrn
+                WHERE (:#{#param.raceCourse} IS NULL OR trwrn.race_course = :#{#param.raceCourse})
+                    AND (:#{#param.placeCondition} IS NULL OR trwrn.place_condition = :#{#param.placeCondition})
+                    AND (:#{#param.raceName} IS NULL OR trwrn.race_name LIKE CONCAT('%', COALESCE(:#{#param.raceName}, ''), '%'))
+                    AND (:#{#param.courseLength} IS NULL OR trwrn.course_length = :#{#param.courseLength})
+                    AND (:#{#param.raceTime} IS NULL OR trwrn.race_time = :#{#param.raceTime})
+                    AND (:#{#param.year} IS NULL OR trwrn.year = :#{#param.year})
+                    AND (:#{#param.horseName} IS NULL OR trwrn.horse_name LIKE CONCAT('%', COALESCE(:#{#param.horseName}, ''), '%'))
+                    AND (:#{#param.sex} IS NULL OR trwrn.sex = :#{#param.sex})
+                    AND (:#{#param.old} IS NULL OR trwrn.old = :#{#param.old})
+                    AND (:#{#param.jockeyName} IS NULL OR trwrn.jockey_name LIKE CONCAT('%', COALESCE(:#{#param.jockeyName}, ''), '%'))
+                    AND (:#{#param.raceOrder} IS NULL OR trwrn.race_order = :#{#param.raceOrder})
+                ;
+            """;
+
+    @Query(value = SEARCH_QUERY, nativeQuery = true)
     List<Map<String, Object>> findByConditions(
             @Param("param") SearchRaceHistoryRequestParameter param
     );
-}
 
-/**
-@Repository
-public interface RaceHistoryRepository {
-    @Query
 
+    String COUNT_SEARCH_QUERY = """
+                SELECT
+                    count(*)
+                FROM t_race_with_race_name trwrn
+                WHERE (:#{#param.raceCourse} IS NULL OR trwrn.race_course = :#{#param.raceCourse})
+                    AND (:#{#param.placeCondition} IS NULL OR trwrn.place_condition = :#{#param.placeCondition})
+                    AND (:#{#param.raceName} IS NULL OR trwrn.race_name LIKE CONCAT('%', COALESCE(:#{#param.raceName}, ''), '%'))
+                    AND (:#{#param.courseLength} IS NULL OR trwrn.course_length = :#{#param.courseLength})
+                    AND (:#{#param.raceTime} IS NULL OR trwrn.race_time = :#{#param.raceTime})
+                    AND (:#{#param.year} IS NULL OR trwrn.year = :#{#param.year})
+                    AND (:#{#param.horseName} IS NULL OR trwrn.horse_name LIKE CONCAT('%', COALESCE(:#{#param.horseName}, ''), '%'))
+                    AND (:#{#param.sex} IS NULL OR trwrn.sex = :#{#param.sex})
+                    AND (:#{#param.old} IS NULL OR trwrn.old = :#{#param.old})
+                    AND (:#{#param.jockeyName} IS NULL OR trwrn.jockey_name LIKE CONCAT('%', COALESCE(:#{#param.jockeyName}, ''), '%'))
+                    AND (:#{#param.raceOrder} IS NULL OR trwrn.race_order = :#{#param.raceOrder})
+                ;
+            """;
+
+    @Query(value = COUNT_SEARCH_QUERY, nativeQuery = true)
+    long countByConditions(
+            @Param("param") SearchRaceHistoryRequestParameter param
+    );
 }
-**/

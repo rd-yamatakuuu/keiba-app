@@ -2,6 +2,7 @@ package com.keiba_app.app.service.SearchRaceHistory;
 
 import com.keiba_app.app.controller.SearchRaceHistory.SearchRaceHistoryRequestParameter;
 import com.keiba_app.app.controller.SearchRaceHistory.SearchRaceHistoryResponseParameter;
+import com.keiba_app.app.exception.TooManyResultsException;
 import com.keiba_app.app.repository.RaceHistoryRepository;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
@@ -17,8 +18,8 @@ import java.util.stream.Collectors;
 @Transactional
 public class SearchRaceHistoryServiceImpl implements SearchRaceHistoryService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     private final RaceHistoryRepository raceHistoryRepository;
+    private static final long MAX_RESULTS = 100;
 
     @Autowired
     public SearchRaceHistoryServiceImpl(RaceHistoryRepository raceHistoryRepository){
@@ -27,8 +28,17 @@ public class SearchRaceHistoryServiceImpl implements SearchRaceHistoryService {
 
     @Override
     public List<SearchRaceHistoryResponseParameter> searchRaceHistoryByCondition(
-            SearchRaceHistoryRequestParameter requestParameter) throws Exception {
+            SearchRaceHistoryRequestParameter requestParameter) {
         logger.info("SearchRaceHistoryServiceImpl requestParam: {}", requestParameter);
+
+        long count = raceHistoryRepository.countByConditions(requestParameter);
+
+        if (count > MAX_RESULTS) {
+            throw new TooManyResultsException(
+                    "検索結果が" + count + "件あります。" + MAX_RESULTS + "件以下に絞り込んでください。"
+            );
+        }
+
         logger.info("SearchRaceHistoryServiceImpl response: {}", raceHistoryRepository.findByConditions(requestParameter));
 
         List<Map<String, Object>> rawResults = raceHistoryRepository.findByConditions(requestParameter);
