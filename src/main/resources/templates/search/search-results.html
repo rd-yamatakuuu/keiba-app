@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+  <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>SearchHistory</title>
+</head>
+<body class="flex flex-col min-h-screen">
+<div layout:fragment="content" class="bg-[#f1f1eb] flex-grow">
+  <div>
+    <div class="mt-4 ml-16 text-4xl font-bold text-red-600 mb-12 italic">SearchResults</div>
+    <div class="flex justify-center mb-12">
+      <div class="search-conditions">
+        <h3>検索条件</h3>
+        <p th:if="${searchParams.raceCourse}">競馬場: <span th:text="${searchParams.raceCourse}"></span></p>
+        <p th:if="${searchParams.horseName}">馬名: <span th:text="${searchParams.horseName}"></span></p>
+        <!-- 他の検索条件 -->
+      </div>
+
+      <!-- 検索結果の表示 -->
+      <div th:if="${not #lists.isEmpty(results)}">
+        <table border="1">
+          <tr>
+            <th>競馬場</th>
+            <th>レース名</th>
+            <th>馬名</th>
+            <th>騎手名</th>
+          </tr>
+          <tr th:each="result : ${results}">
+            <td th:text="${result.raceCourse}"></td>
+            <td th:text="${result.raceName}"></td>
+            <td th:text="${result.horseName}"></td>
+            <td th:text="${result.jockeyName}"></td>
+          </tr>
+        </table>
+      </div>
+      <div th:if="${#lists.isEmpty(results)}">
+        <p>検索結果がありません。</p>
+      </div>
+
+      <!-- 検索フォームに戻るリンク -->
+      <div>
+        <a th:href="@{/search}">検索フォームに戻る</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

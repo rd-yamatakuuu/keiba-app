@@ -1,5 +1,6 @@
 package com.keiba_app.app.controller.SearchRaceHistory;
 
+import com.keiba_app.app.dto.RaceHistoryDto;
 import com.keiba_app.app.exception.ErrorResponse;
 import com.keiba_app.app.exception.TooManyResultsException;
 import com.keiba_app.app.service.SearchRaceHistory.SearchRaceHistoryService;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/search")
+@RequestMapping("/search-history")
 @RequiredArgsConstructor
 public class SearchRaceHistoryController {
     private final SearchRaceHistoryServiceImpl searchRaceHistoryServiceImpl;
@@ -22,7 +23,7 @@ public class SearchRaceHistoryController {
 
     @PostMapping
     public ResponseEntity<List<SearchRaceHistoryResponseParameter>> searchRaceHistory(
-            @RequestBody SearchRaceHistoryRequestParameter requestParameter) throws Exception {
+            @RequestBody RaceHistoryDto requestParameter) throws Exception {
 
         logger.info("SearchRaceHistoryController request parameter: {}", requestParameter);
 

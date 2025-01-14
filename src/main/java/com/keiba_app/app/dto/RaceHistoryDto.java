@@ -1,6 +1,7 @@
 package com.keiba_app.app.dto;
 
 
+import com.keiba_app.app.controller.SearchRaceHistory.SearchRaceHistoryRequestParameter;
 import com.keiba_app.app.domain.entity.RaceHistory;
 import lombok.Data;
 
@@ -17,7 +18,7 @@ public class RaceHistoryDto {
 
     private Long courseLength;
 
-    private String round;
+    private String raceTime;
 
     private String year;
 
@@ -25,24 +26,42 @@ public class RaceHistoryDto {
 
     private String sex;
 
-    private Long old;
+    private Integer old;
 
     private String jockeyName;
 
+    private String raceOrder;
 
-    public static RaceHistoryDto convertToDto(RaceHistory raceHistory) {
+
+    public static RaceHistoryDto from(SearchRaceHistoryRequestParameter param) {
         RaceHistoryDto dto = new RaceHistoryDto();
-        dto.setId(raceHistory.getId());
-        dto.setRaceCourse(raceHistory.getRaceCourse());
-        dto.setPlaceCondition(raceHistory.getPlaceCondition());
-        dto.setRaceName(raceHistory.getRaceName());
-        dto.setCourseLength(raceHistory.getCourseLength());
-        dto.setRound(raceHistory.getRound());
-        dto.setYear(raceHistory.getYear());
-        dto.setHorseName(raceHistory.getHorseName());
-        dto.setSex(raceHistory.getSex());
-        dto.setOld(raceHistory.getOld());
-        dto.setJockeyName(raceHistory.getJockeyName());
+
+        // RaceCourseの変換（enumからsearchCodeへ）
+        if (param.getRaceCourse() != null) {
+            dto.setRaceCourse(param.getRaceCourse().getSearchCode());
+        }
+
+        // CourseLengthの変換（enumからmeters値へ）
+        if (param.getCourseLength() != null) {
+            dto.setCourseLength(param.getCourseLength().getMeters());
+        }
+
+        dto.setRaceTime(param.getRaceTime());
+
+        // その他のフィールドの設定
+        if (param.getPlaceCondition() != null) {
+            dto.setPlaceCondition(param.getPlaceCondition().getDisplayName());
+        }
+        dto.setRaceName(param.getRaceName());
+        dto.setYear(param.getYear());
+        dto.setHorseName(param.getHorseName());
+        if (param.getSex() != null) {
+            dto.setSex(param.getSex().name());
+        }
+        dto.setOld(param.getOld() != null ? param.getOld().intValue() : null);
+        dto.setJockeyName(param.getJockeyName());
+        dto.setRaceOrder(param.getRaceOrder());
+
         return dto;
     }
 }
