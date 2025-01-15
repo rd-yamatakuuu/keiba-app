@@ -1,15 +1,12 @@
 package com.keiba_app.app.controller;
 
 import ch.qos.logback.core.testUtil.RandomUtil;
-import com.keiba_app.app.constant.enums.CourseLength;
-import com.keiba_app.app.constant.enums.PlaceCondition;
-import com.keiba_app.app.constant.enums.RaceCourse;
-import com.keiba_app.app.constant.enums.Sex;
 import com.keiba_app.app.controller.PredictTop3.PredictTop3Controller;
 import com.keiba_app.app.controller.SearchRaceHistory.SearchRaceHistoryController;
 import com.keiba_app.app.controller.SearchRaceHistory.SearchRaceHistoryRequestParameter;
 import com.keiba_app.app.controller.SearchRaceHistory.SearchRaceHistoryResponseParameter;
 import com.keiba_app.app.dto.RaceHistoryDto;
+import com.keiba_app.app.exception.TooManyResultsException;
 import com.keiba_app.app.service.SearchRaceHistory.SearchRaceHistoryServiceImpl;
 import groovy.util.logging.Slf4j;
 import jakarta.validation.Valid;
@@ -53,18 +50,6 @@ public class SearchRaceHistoryViewController {
         logger.debug("Showing search form");  // ログ追加
 
         model.addAttribute("requestParameter", new SearchRaceHistoryRequestParameter());
-        model.addAttribute("raceCourses", RaceCourse.values());
-        model.addAttribute("placeConditions", PlaceCondition.values());
-        model.addAttribute("courseLengths", CourseLength.values());
-        model.addAttribute("sex", Sex.values());
-
-        // 年の選択肢をStringのリストとして生成
-        int currentYear = Year.now().getValue();
-        List<String> years = IntStream.rangeClosed(currentYear - 3, currentYear - 1)
-                .mapToObj(String::valueOf)  // intからStringに変換
-                .sorted(Comparator.reverseOrder())
-                .collect(Collectors.toList());
-        model.addAttribute("years", years);
 
         logger.debug("Validation errors: test");
         System.out.println("Search method finished");
@@ -83,46 +68,28 @@ public class SearchRaceHistoryViewController {
         logger.debug("Validation errors: {}", bindingResult.getAllErrors());
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("raceCourses", RaceCourse.values());
-            model.addAttribute("placeConditions", PlaceCondition.values());
-            model.addAttribute("courseLengths", CourseLength.values());
-            model.addAttribute("sex", Sex.values());
-            int currentYear = Year.now().getValue();
-            List<String> years = IntStream.rangeClosed(currentYear - 3, currentYear - 1)
-                    .mapToObj(String::valueOf)  // intからStringに変換
-                    .sorted(Comparator.reverseOrder())
-                    .collect(Collectors.toList());
-            model.addAttribute("years", years);
             return "search/search-form";
         }
-        /*
         try {
+            System.out.println("Original　request parameter: " + requestParameter);
             logger.debug("Validation errors: {}", bindingResult.getAllErrors());
             logger.info("SearchRaceHistoryController request parameter: {}", requestParameter);
 
+            RaceHistoryDto searchDto = RaceHistoryDto.from(requestParameter);
+            logger.info("Converted DTO for search: {}", searchDto);
             List<SearchRaceHistoryResponseParameter> results =
-                    searchRaceHistoryServiceImpl.searchRaceHistoryByCondition(requestParameter);
+                    searchRaceHistoryServiceImpl.searchRaceHistoryByCondition(searchDto);
 
             model.addAttribute("results", results);
             model.addAttribute("searchParams", requestParameter);
+            return "search/search-results";
 
+        } catch (TooManyResultsException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "search/search-form";
         } catch (Exception e) {
             throw new Exception(e);
         }
-        return "search/search-results";
-        */
-        System.out.println("Original　request parameter: " + requestParameter);
-        logger.debug("Validation errors: {}", bindingResult.getAllErrors());
-        logger.info("SearchRaceHistoryController request parameter: {}", requestParameter);
-
-        RaceHistoryDto searchDto = RaceHistoryDto.from(requestParameter);
-        logger.info("Converted DTO for search: {}", searchDto);
-        List<SearchRaceHistoryResponseParameter> results =
-                searchRaceHistoryServiceImpl.searchRaceHistoryByCondition(searchDto);
-
-        model.addAttribute("results", results);
-        model.addAttribute("searchParams", requestParameter);
-        return "search/search-results";
     }
 
     /*

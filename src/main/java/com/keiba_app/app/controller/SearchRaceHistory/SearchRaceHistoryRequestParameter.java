@@ -1,9 +1,5 @@
 package com.keiba_app.app.controller.SearchRaceHistory;
 
-import com.keiba_app.app.constant.enums.CourseLength;
-import com.keiba_app.app.constant.enums.PlaceCondition;
-import com.keiba_app.app.constant.enums.RaceCourse;
-import com.keiba_app.app.constant.enums.Sex;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -15,14 +11,14 @@ import lombok.NoArgsConstructor;
 @Data
 public class SearchRaceHistoryRequestParameter {
 
-    private RaceCourse raceCourse;
+    private String raceCourse;
 
-    private PlaceCondition placeCondition;
+    private String placeCondition;
 
     @Size(max = 50, message = "レース名は50文字以内で入力してください")
     private String raceName;
 
-    private CourseLength courseLength;
+    private String courseLength;
 
     private String raceTime;
 
@@ -31,9 +27,9 @@ public class SearchRaceHistoryRequestParameter {
     @Size(max = 20, message = "馬名は20文字以内で入力してください")
     private String horseName;
 
-    private Sex sex;
+    private String sex;
 
-    private Integer old;
+    private String old;
 
     @Size(max = 20, message = "騎手名は20文字以内で入力してください")
     private String jockeyName;

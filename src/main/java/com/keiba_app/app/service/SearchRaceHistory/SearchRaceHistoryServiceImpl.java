@@ -1,9 +1,5 @@
 package com.keiba_app.app.service.SearchRaceHistory;
 
-import com.keiba_app.app.constant.enums.CourseLength;
-import com.keiba_app.app.constant.enums.PlaceCondition;
-import com.keiba_app.app.constant.enums.RaceCourse;
-import com.keiba_app.app.constant.enums.Sex;
 import com.keiba_app.app.controller.SearchRaceHistory.SearchRaceHistoryRequestParameter;
 import com.keiba_app.app.controller.SearchRaceHistory.SearchRaceHistoryResponseParameter;
 import com.keiba_app.app.dto.RaceHistoryDto;
@@ -80,36 +76,15 @@ public class SearchRaceHistoryServiceImpl implements SearchRaceHistoryService {
                 .map(row -> {
                     SearchRaceHistoryResponseParameter response = new SearchRaceHistoryResponseParameter();
 
-                    // 競馬場の変換処理（searchCodeから表示名へ）
-                    String raceCourseCode = (String) row.get("raceCourse");
-                    RaceCourse raceCourse = RaceCourse.fromSearchCode(raceCourseCode);
-                    response.setRaceCourse(raceCourse != null ? raceCourse.getDisplayName() : raceCourseCode);
-
-                    // 馬場状態の変換
-                    String placeConditionValue = (String) row.get("placeCondition");
-                    PlaceCondition placeCondition = PlaceCondition.valueOf(placeConditionValue);
-                    response.setPlaceCondition(placeCondition != null ? placeCondition.getDisplayName() : placeConditionValue);
-
-                    // コース距離の変換
-                    Object courseLengthValue = row.get("courseLength");
-                    if (courseLengthValue != null) {
-                        CourseLength courseLength = CourseLength.fromMeters(((Number) courseLengthValue).intValue());
-                        response.setCourseLength(courseLength != null ? courseLength.getDisplayName() : String.valueOf(courseLengthValue));
-                    }
-
-                    // 性別の変換
-                    String sexValue = (String) row.get("sex");
-                    if (sexValue != null) {
-                        Sex sex = Sex.valueOf(sexValue);
-                        response.setSex(sex != null ? sex.getDisplayName() : sexValue);
-                    }
-
-                    // その他のフィールド
+                    response.setRaceCourse((String) row.get("raceCourse"));
+                    response.setPlaceCondition((String) row.get("placeCondition"));
+                    response.setCourseLength((Long) row.get("courseLength"));
+                    response.setSex((String) row.get("sex"));
                     response.setRaceName((String) row.get("raceName"));
                     response.setRaceTime((String) row.get("raceTime"));
                     response.setYear((String) row.get("year"));
                     response.setHorseName((String) row.get("horseName"));
-                    response.setOld(String.valueOf(row.get("old")));
+                    response.setOld((Long) (row.get("old")));
                     response.setJockeyName((String) row.get("jockeyName"));
                     response.setRaceOrder((String) row.get("raceOrder"));
 

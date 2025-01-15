@@ -36,19 +36,18 @@ public interface RaceHistoryRepository extends JpaRepository<RaceHistory, Intege
                     jockey_name AS jockeyName,
                     race_order AS raceOrder
                 FROM t_race_with_race_name trwrn
-                 /*%n WHERE %n*/
-                WHERE
-                     trwrn.race_course = COALESCE(:#{#param.raceCourse}, trwrn.race_course)
-                     AND trwrn.place_condition = COALESCE(:#{#param.placeCondition}, trwrn.place_condition)
-                     AND trwrn.race_name LIKE CONCAT('%', COALESCE(:#{#param.raceName}, ''), '%')
-                     AND trwrn.course_length = COALESCE(:#{#param.courseLength}, trwrn.course_length)
-                     AND trwrn.race_time = COALESCE(:#{#param.raceTime}, trwrn.race_time)
-                     AND trwrn.year = COALESCE(:#{#param.year}, trwrn.year)
-                     AND trwrn.horse_name LIKE CONCAT('%', COALESCE(:#{#param.horseName}, ''), '%')
-                     AND trwrn.sex = COALESCE(:#{#param.sex}, trwrn.sex)
-                     AND trwrn.old = COALESCE(:#{#param.old}, trwrn.old)
-                     AND trwrn.jockey_name LIKE CONCAT('%', COALESCE(:#{#param.jockeyName}, ''), '%')
-                     AND trwrn.race_order = COALESCE(:#{#param.raceOrder}, trwrn.race_order)
+                 WHERE
+                     (:#{#param.raceCourse} = '' OR trwrn.race_course = :#{#param.raceCourse})
+                     AND (:#{#param.placeCondition} = '' OR trwrn.place_condition = :#{#param.placeCondition})
+                     AND (:#{#param.raceName} = '' OR trwrn.race_name LIKE CONCAT('%', :#{#param.raceName}, '%'))
+                     AND (:#{#param.courseLength} = '' OR trwrn.course_length = :#{#param.courseLength})
+                     AND (:#{#param.raceTime} = '' OR trwrn.race_time = :#{#param.raceTime})
+                     AND (:#{#param.year} = '' OR trwrn.year = :#{#param.year})
+                     AND (:#{#param.horseName} = '' OR trwrn.horse_name LIKE CONCAT('%', :#{#param.horseName}, '%'))
+                     AND (:#{#param.sex} = '' OR trwrn.sex = :#{#param.sex})
+                     AND (:#{#param.old} = '' OR trwrn.old = :#{#param.old})
+                     AND (:#{#param.jockeyName} = '' OR trwrn.jockey_name LIKE CONCAT('%', :#{#param.jockeyName}, '%'))
+                     AND (:#{#param.raceOrder} = '' OR trwrn.race_order = :#{#param.raceOrder})
                 ;
             """;
 
@@ -61,18 +60,17 @@ public interface RaceHistoryRepository extends JpaRepository<RaceHistory, Intege
                     count(*)
                 FROM t_race_with_race_name trwrn
                 WHERE
-                     trwrn.race_course = COALESCE(:#{#param.raceCourse}, trwrn.race_course)
-                     AND trwrn.place_condition = COALESCE(:#{#param.placeCondition}, trwrn.place_condition)
-                     AND trwrn.race_name LIKE CONCAT('%', COALESCE(:#{#param.raceName}, ''), '%')
-                     AND trwrn.course_length = COALESCE(:#{#param.courseLength}, trwrn.course_length)
-                     AND trwrn.race_time = COALESCE(:#{#param.raceTime}, trwrn.race_time)
-                     AND trwrn.year = COALESCE(:#{#param.year}, trwrn.year)
-                     AND trwrn.horse_name LIKE CONCAT('%', COALESCE(:#{#param.horseName}, ''), '%')
-                     AND trwrn.sex = COALESCE(:#{#param.sex}, trwrn.sex)
-                     AND trwrn.old = COALESCE(:#{#param.old}, trwrn.old)
-                     AND trwrn.jockey_name LIKE CONCAT('%', COALESCE(:#{#param.jockeyName}, ''), '%')
-                     AND trwrn.race_order = COALESCE(:#{#param.raceOrder}, trwrn.race_order)
-                ;
+                     (:#{#param.raceCourse} = '' OR trwrn.race_course = :#{#param.raceCourse})
+                     AND (:#{#param.placeCondition} = '' OR trwrn.place_condition = :#{#param.placeCondition})
+                     AND (:#{#param.raceName} = '' OR trwrn.race_name LIKE CONCAT('%', :#{#param.raceName}, '%'))
+                     AND (:#{#param.courseLength} = '' OR trwrn.course_length = :#{#param.courseLength})
+                     AND (:#{#param.raceTime} = '' OR trwrn.race_time = :#{#param.raceTime})
+                     AND (:#{#param.year} = '' OR trwrn.year = :#{#param.year})
+                     AND (:#{#param.horseName} = '' OR trwrn.horse_name LIKE CONCAT('%', :#{#param.horseName}, '%'))
+                     AND (:#{#param.sex} = '' OR trwrn.sex = :#{#param.sex})
+                     AND (:#{#param.old} = '' OR trwrn.old = :#{#param.old})
+                     AND (:#{#param.jockeyName} = '' OR trwrn.jockey_name LIKE CONCAT('%', :#{#param.jockeyName}, '%'))
+                     AND (:#{#param.raceOrder} = '' OR trwrn.race_order = :#{#param.raceOrder})
             """;
 
     @Query(value = COUNT_SEARCH_QUERY, nativeQuery = true)

@@ -20,9 +20,9 @@
   <div>
     <div class="mt-4 ml-16 text-4xl font-bold text-red-600 mb-12 italic">SearchHistory</div>
     <div class="flex justify-center mb-12">
-      <form th:action="@{/search}" th:object="${requestParameter}" method="post">
-        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
-          <span th:text="${errorMessage}"></span>
+      <form th:action="@{/search}" th:object="${requestParameter}" method="post" class="max-w-2xl">
+        <div th:if="${errorMessage}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-4">
+            <span th:text="${errorMessage}" class="block"></span>
         </div>
         <div class="mb-8">
           <h3 class="text-lg font-semibold border-b-2 border-brown-600 pb-2 mb-4">基本情報</h3>
@@ -32,11 +32,11 @@
               <div class="flex items-center gap-2">
                 <input type="text" th:field="*{raceCourse}" class="w-64 p-2 border rounded">
                 <div class="relative inline-block group">
-            <span class="cursor-help text-blue-500">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
-                </svg>
-            </span>
+                  <span class="cursor-help text-blue-500">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                      </svg>
+                  </span>
                   <div class="absolute hidden group-hover:block bottom-full mb-2 w-48 bg-gray-800 text-white text-sm rounded-lg py-2 px-3 z-10">
                     札幌：01, 函館：02, 福島：03, 新潟：04, 東京：05, 中山：06, 中京：07, 京都：08, 阪神：09, 小倉：10です。2桁の数字を入力してください
                     <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
@@ -51,51 +51,112 @@
 
             <div class="flex items-center">
               <label for="raceName" class="w-32">レース名:</label>
-              <input type="text" th:field="*{raceName}" class="w-64 p-2 border rounded">
+              <div class="flex items-center gap-2">
+                <input type="text" th:field="*{raceName}" class="w-64 p-2 border rounded">
+                <div class="relative inline-block group">
+                    <span class="cursor-help text-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                    <div class="absolute hidden group-hover:block bottom-full mb-2 w-48 bg-gray-800 text-white text-sm rounded-lg py-2 px-3 z-10">
+                    部分一致検索です
+                    <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
+                      <svg class="h-2 w-2 text-gray-800" fill="currentColor" viewBox="0 0 8 4">
+                        <polygon points="0,0 8,0 4,4"/>
+                      </svg>
+                    </div>
+                    </div>
+                </div>
+              </div>
             </div>
 
             <div class="flex items-center">
               <label for="raceTime" class="w-32">ラウンド:</label>
-              <select th:field="*{raceTime}" class="w-64 p-2 border rounded bg-white">
-                <option value=>選択してください</option>
-                <option th:each="i : ${#numbers.sequence(1, 12)}"
-                        th:value="${i}"
-                        th:text="${i + 'R'}">
-                </option>
-              </select>
+              <div class="flex items-center gap-2">
+                <input type="text" th:field="*{raceTime}" class="w-64 p-2 border rounded">
+                <div class="relative inline-block group">
+                    <span class="cursor-help text-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                  <div class="absolute hidden group-hover:block bottom-full mb-2 w-48 bg-gray-800 text-white text-sm rounded-lg py-2 px-3 z-10">
+                    01 ~ 12の二桁を入力してください。重賞は大体11です。
+                    <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
+                      <svg class="h-2 w-2 text-gray-800" fill="currentColor" viewBox="0 0 8 4">
+                        <polygon points="0,0 8,0 4,4"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="flex items-center">
               <label for="year" class="w-32">開催年:</label>
-              <select th:field="*{year}" class="w-64 p-2 border rounded bg-white">
-                <option value="">選択してください</option>
-                <option th:each="y : ${years}"
-                        th:value="${y}"
-                        th:text="${y}">
-                </option>
-              </select>
+              <div class="flex items-center gap-2">
+                <input type="text" th:field="*{year}" class="w-64 p-2 border rounded">
+                <div class="relative inline-block group">
+                    <span class="cursor-help text-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                  <div class="absolute hidden group-hover:block bottom-full mb-2 w-48 bg-gray-800 text-white text-sm rounded-lg py-2 px-3 z-10">
+                    2022, 2023, 2024のいずれかを入力してください
+                    <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
+                      <svg class="h-2 w-2 text-gray-800" fill="currentColor" viewBox="0 0 8 4">
+                        <polygon points="0,0 8,0 4,4"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="flex items-center">
               <label for="placeCondition" class="w-32">馬場:</label>
-              <select th:field="*{placeCondition}" class="w-64 p-2 border rounded bg-white">
-                <option value="">選択してください</option>
-                <option th:each="condition : ${placeConditions}"
-                        th:value="${condition}"
-                        th:text="${condition.displayName}">
-                </option>
-              </select>
+              <div class="flex items-center gap-2">
+                <input type="text" th:field="*{placeCondition}" class="w-64 p-2 border rounded">
+                <div class="relative inline-block group">
+                    <span class="cursor-help text-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                  <div class="absolute hidden group-hover:block bottom-full mb-2 w-48 bg-gray-800 text-white text-sm rounded-lg py-2 px-3 z-10">
+                    良、稍、重、不のいずれかを入力してください
+                    <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
+                      <svg class="h-2 w-2 text-gray-800" fill="currentColor" viewBox="0 0 8 4">
+                        <polygon points="0,0 8,0 4,4"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="flex items-center">
               <label for="courseLength" class="w-32">コース距離:</label>
-              <select th:field="*{courseLength}" class="w-64 p-2 border rounded bg-white">
-                <option value="">選択してください</option>
-                <option th:each="length : ${courseLengths}"
-                        th:value="${length}"
-                        th:text="${length.displayName}">
-                </option>
-              </select>
+              <div class="flex items-center gap-2">
+                <input type="text" th:field="*{courseLength}" class="w-64 p-2 border rounded">
+                <div class="relative inline-block group">
+                    <span class="cursor-help text-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                  <div class="absolute hidden group-hover:block bottom-full mb-2 w-48 bg-gray-800 text-white text-sm rounded-lg py-2 px-3 z-10">
+                    1000など、数字4桁で入力してください
+                    <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
+                      <svg class="h-2 w-2 text-gray-800" fill="currentColor" viewBox="0 0 8 4">
+                        <polygon points="0,0 8,0 4,4"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -106,29 +167,68 @@
           <div class="grid gap-4">
             <div class="flex items-center">
               <label for="horseName" class="w-32">馬名:</label>
-              <input type="text" th:field="*{horseName}" class="w-64 p-2 border rounded">
+              <div class="flex items-center gap-2">
+                <input type="text" th:field="*{horseName}" class="w-64 p-2 border rounded">
+                <div class="relative inline-block group">
+                    <span class="cursor-help text-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                  <div class="absolute hidden group-hover:block bottom-full mb-2 w-48 bg-gray-800 text-white text-sm rounded-lg py-2 px-3 z-10">
+                    部分一致検索です
+                    <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
+                      <svg class="h-2 w-2 text-gray-800" fill="currentColor" viewBox="0 0 8 4">
+                        <polygon points="0,0 8,0 4,4"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="flex items-center">
               <label for="sex" class="w-32">性別:</label>
-              <select th:field="*{sex}" class="w-64 p-2 border rounded bg-white">
-                <option value="">選択してください</option>
-                <option th:each="sex : ${sex}"
-                        th:value="${sex}"
-                        th:text="${sex.displayName}">
-                </option>
-              </select>
+              <div class="flex items-center gap-2">
+                <input type="text" th:field="*{sex}" class="w-64 p-2 border rounded">
+                <div class="relative inline-block group">
+                    <span class="cursor-help text-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                  <div class="absolute hidden group-hover:block bottom-full mb-2 w-48 bg-gray-800 text-white text-sm rounded-lg py-2 px-3 z-10">
+                    牝、牡、セのいずれかを入力してください
+                    <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
+                      <svg class="h-2 w-2 text-gray-800" fill="currentColor" viewBox="0 0 8 4">
+                        <polygon points="0,0 8,0 4,4"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="flex items-center">
               <label for="old" class="w-32">年齢:</label>
-              <select th:field="*{old}" class="w-64 p-2 border rounded bg-white">
-                <option value="">選択してください</option>
-                <option th:each="i : ${#numbers.sequence(2, 10)}"
-                        th:value="${i}"
-                        th:text="${i + '歳'}">
-                </option>
-              </select>
+              <div class="flex items-center gap-2">
+                <input type="text" th:field="*{old}" class="w-64 p-2 border rounded">
+                <div class="relative inline-block group">
+                    <span class="cursor-help text-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                  <div class="absolute hidden group-hover:block bottom-full mb-2 w-48 bg-gray-800 text-white text-sm rounded-lg py-2 px-3 z-10">
+                    3~8あたりの一桁の数字を入力してください
+                    <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
+                      <svg class="h-2 w-2 text-gray-800" fill="currentColor" viewBox="0 0 8 4">
+                        <polygon points="0,0 8,0 4,4"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -138,7 +238,25 @@
           <h3 class="text-lg font-semibold border-b-2 border-brown-600 pb-2 mb-4">ジョッキー</h3>
           <div class="flex items-center">
             <label for="jockeyName" class="w-32">ジョッキー名:</label>
-            <input type="text" th:field="*{jockeyName}" class="w-64 p-2 border rounded">
+            <div class="flex items-center gap-2">
+              <input type="text" th:field="*{jockeyName}" class="w-64 p-2 border rounded">
+              <div class="relative inline-block group">
+                    <span class="cursor-help text-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                <div class="absolute hidden group-hover:block bottom-full mb-2 w-48 bg-gray-800 text-white text-sm rounded-lg py-2 px-3 z-10">
+                  部分一致検索です
+                  <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
+                    <svg class="h-2 w-2 text-gray-800" fill="currentColor" viewBox="0 0 8 4">
+                      <polygon points="0,0 8,0 4,4"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -147,13 +265,24 @@
           <h3 class="text-lg font-semibold border-b-2 border-brown-600 pb-2 mb-4">結果</h3>
           <div class="flex items-center">
             <label for='raceOrder' class="w-32">順位:</label>
-              <select th:field="*{raceOrder}" class="w-64 p-2 border rounded">
-                <option value="">選択してください</option>
-                <option th:each="i : ${#numbers.sequence(1, 19)}"
-                        th:value="${i}"
-                        th:text="${i + '位'}">
-                </option>
-              </select>
+            <div class="flex items-center gap-2">
+              <input type="text" th:field="*{raceOrder}" class="w-64 p-2 border rounded">
+              <div class="relative inline-block group">
+                    <span class="cursor-help text-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                <div class="absolute hidden group-hover:block bottom-full mb-2 w-48 bg-gray-800 text-white text-sm rounded-lg py-2 px-3 z-10">
+                  1 ~ 18の1桁もしくは2桁の数字を入力してください
+                  <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
+                    <svg class="h-2 w-2 text-gray-800" fill="currentColor" viewBox="0 0 8 4">
+                      <polygon points="0,0 8,0 4,4"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
