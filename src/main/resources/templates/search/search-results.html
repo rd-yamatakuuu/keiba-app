@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+  <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>SearchHistory</title>
+</head>
+<body class="flex flex-col min-h-screen">
+<div layout:fragment="content" class="bg-[#f1f1eb] flex-grow">
+  <div class="container mx-auto px-4">
+    <div class="mt-4 text-4xl font-bold text-red-600 mb-12 italic">SearchResults</div>
+
+    <div class="flex flex-col space-y-8 mb-12">
+
+      <div class="mb-4">
+        <a th:href="@{/search}" class="underline hover:text-gray-600">
+          検索フォームに戻る
+        </a>
+      </div>
+      <!-- 検索条件 -->
+      <div class="w-full bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold mb-4">検索条件</h3>
+        <div class="grid grid-cols-2 gap-4">
+          <p th:if="${searchParams.raceCourse}">競馬場: <span th:text="${searchParams.raceCourse}" class="font-medium"></span></p>
+          <p th:if="${searchParams.raceName}">レース名: <span th:text="${searchParams.raceName}" class="font-medium"></span></p>
+          <p th:if="${searchParams.raceTime}">ラウンド: <span th:text="${searchParams.raceTime}" class="font-medium"></span></p>
+          <p th:if="${searchParams.year}">開催年: <span th:text="${searchParams.year}" class="font-medium"></span></p>
+          <p th:if="${searchParams.placeCondition}">馬場: <span th:text="${searchParams.placeCondition}" class="font-medium"></span></p>
+          <p th:if="${searchParams.courseLength}">コース距離: <span th:text="${searchParams.courseLength}" class="font-medium"></span></p>
+          <p th:if="${searchParams.horseName}">馬名: <span th:text="${searchParams.horseName}" class="font-medium"></span></p>
+          <p th:if="${searchParams.sex}">性別: <span th:text="${searchParams.sex}" class="font-medium"></span></p>
+          <p th:if="${searchParams.year}">年齢: <span th:text="${searchParams.year}" class="font-medium"></span></p>
+          <p th:if="${searchParams.jockeyName}">騎手名: <span th:text="${searchParams.jockeyName}" class="font-medium"></span></p>
+          <p th:if="${searchParams.raceOrder}">順位: <span th:text="${searchParams.raceOrder}" class="font-medium"></span></p>
+        </div>
+      </div>
+
+      <!-- 検索結果テーブル -->
+      <div th:if="${not #lists.isEmpty(results)}" class="w-full overflow-x-auto">
+        <table class="min-w-full bg-white border">
+          <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 border-b text-left">競馬場</th>
+            <th class="px-6 py-3 border-b text-left">レース名</th>
+            <th class="px-6 py-3 border-b text-left">ラウンド</th>
+            <th class="px-6 py-3 border-b text-left">開催年</th>
+            <th class="px-6 py-3 border-b text-left">馬場</th>
+            <th class="px-6 py-3 border-b text-left">コース距離</th>
+            <th class="px-6 py-3 border-b text-left">馬名</th>
+            <th class="px-6 py-3 border-b text-left">性別</th>
+            <th class="px-6 py-3 border-b text-left">年齢</th>
+            <th class="px-6 py-3 border-b text-left">騎手名</th>
+            <th class="px-6 py-3 border-b text-left">順位</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="result : ${results}" class="hover:bg-gray-50">
+            <td class="px-6 py-4 border-b" th:text="${result.raceCourse}"></td>
+            <td class="px-6 py-4 border-b" th:text="${result.raceName}"></td>
+            <td class="px-6 py-4 border-b" th:text="${result.raceTime}"></td>
+            <td class="px-6 py-4 border-b" th:text="${result.year}"></td>
+            <td class="px-6 py-4 border-b" th:text="${result.placeCondition}"></td>
+            <td class="px-6 py-4 border-b" th:text="${result.courseLength}"></td>
+            <td class="px-6 py-4 border-b" th:text="${result.horseName}"></td>
+            <td class="px-6 py-4 border-b" th:text="${result.sex}"></td>
+            <td class="px-6 py-4 border-b" th:text="${result.old}"></td>
+            <td class="px-6 py-4 border-b" th:text="${result.jockeyName}"></td>
+            <td class="px-6 py-4 border-b" th:text="${result.raceOrder}"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div th:if="${#lists.isEmpty(results)}" class="w-full p-4 bg-white rounded-lg shadow">
+        <p>検索結果がありません。</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

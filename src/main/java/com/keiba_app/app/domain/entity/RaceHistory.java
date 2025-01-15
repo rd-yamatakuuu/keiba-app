@@ -45,9 +45,12 @@ public class RaceHistory {
     private String sex;
 
     @Column(nullable = false)
-    private Long old;
+    private Integer old;
 
     @Column(nullable = false)
     private String jockeyName;
+
+    @Column(nullable = false)
+    private String raceOrder;
 
 }

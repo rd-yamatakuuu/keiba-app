@@ -1,6 +1,7 @@
 package com.keiba_app.app.dto;
 
 
+import com.keiba_app.app.controller.SearchRaceHistory.SearchRaceHistoryRequestParameter;
 import com.keiba_app.app.domain.entity.RaceHistory;
 import lombok.Data;
 
@@ -15,9 +16,9 @@ public class RaceHistoryDto {
 
     private String raceName;
 
-    private Long courseLength;
+    private String courseLength;
 
-    private String round;
+    private String raceTime;
 
     private String year;
 
@@ -25,24 +26,28 @@ public class RaceHistoryDto {
 
     private String sex;
 
-    private Long old;
+    private String old;
 
     private String jockeyName;
 
+    private String raceOrder;
 
-    public static RaceHistoryDto convertToDto(RaceHistory raceHistory) {
+
+    public static RaceHistoryDto from(SearchRaceHistoryRequestParameter param) {
         RaceHistoryDto dto = new RaceHistoryDto();
-        dto.setId(raceHistory.getId());
-        dto.setRaceCourse(raceHistory.getRaceCourse());
-        dto.setPlaceCondition(raceHistory.getPlaceCondition());
-        dto.setRaceName(raceHistory.getRaceName());
-        dto.setCourseLength(raceHistory.getCourseLength());
-        dto.setRound(raceHistory.getRound());
-        dto.setYear(raceHistory.getYear());
-        dto.setHorseName(raceHistory.getHorseName());
-        dto.setSex(raceHistory.getSex());
-        dto.setOld(raceHistory.getOld());
-        dto.setJockeyName(raceHistory.getJockeyName());
+
+        dto.setRaceCourse(param.getRaceCourse());
+        dto.setCourseLength(param.getCourseLength());
+        dto.setRaceTime(param.getRaceTime());
+        dto.setPlaceCondition(param.getPlaceCondition());
+        dto.setRaceName(param.getRaceName());
+        dto.setYear(param.getYear());
+        dto.setHorseName(param.getHorseName());
+        dto.setSex(param.getSex());
+        dto.setOld(param.getOld());
+        dto.setJockeyName(param.getJockeyName());
+        dto.setRaceOrder(param.getRaceOrder());
+
         return dto;
     }
 }

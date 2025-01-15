@@ -21,7 +21,7 @@ public class SearchRaceHistoryResponseParameter {
     private String raceName;
 
     @JsonProperty("course_length")
-    private String courseLength;
+    private Long courseLength;
 
     @JsonProperty("race_time")
     private String raceTime;
@@ -36,7 +36,7 @@ public class SearchRaceHistoryResponseParameter {
     private String sex;
 
     @JsonProperty("old")
-    private String old;
+    private Long old;
 
     @JsonProperty("jockey_name")
     private String jockeyName;
