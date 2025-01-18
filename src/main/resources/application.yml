@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: keiba_app
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+  datasource:
+    url: jdbc:mysql://localhost:3306/keiba_bot
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+base:
+  api:
+    url: http://localhost:8080
+api:
+  url:
+    get-candidate-race: /get-candidate-race
+    predict-top3: /predict-top3
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG

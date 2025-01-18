@@ -1,0 +1,25 @@
+spring:
+  config:
+    import: aws-parameterstore:/
+  application:
+    name: keiba_app
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+  datasource:
+    url: {$keiba-app-db-endpoint}
+    username: {$keiba-app-db-username}
+    password: {$keiba-app-db-password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+base:
+  api:
+    url: http://localhost:8080
+api:
+  url:
+    get-candidate-race: /get-candidate-race
+    predict-top3: /predict-top3
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
